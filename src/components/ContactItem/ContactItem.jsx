@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 
 const ContactItem = ({ contact, onDeleteContact }) => {
 
   return (
-    <ListItem>
-      <ContactName>{contact.name}</ContactName>
-      <DeleteButton onClick={() => onDeleteContact(contact.id)}>Delete</DeleteButton>
-    </ListItem>
+    <div>
+      <div>{contact.name}</div>
+      <button onClick={() => onDeleteContact(contact.id)}>Delete</button>
+    </div>
   );
 };
 
