@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
+
+import { StyledContactForm } from './AddContactForm.styled';
+
 const ContactForm = ({ onAddContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onAddContact(name, number); 
+    onAddContact(name, number);
     setName('');
     setNumber('');
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <StyledContactForm onSubmit={onSubmit}>
       <label>
         Name:
         <input
@@ -38,12 +41,11 @@ const ContactForm = ({ onAddContact }) => {
         />
       </label>
       <button type="submit">Add Contact</button>
-    </form>
+    </StyledContactForm>
   );
 };
 
 export default ContactForm;
-
 
 ContactForm.propTypes = {
   onAddContact: PropTypes.func.isRequired,

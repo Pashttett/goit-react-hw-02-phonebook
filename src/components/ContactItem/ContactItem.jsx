@@ -6,7 +6,7 @@ const ContactItem = ({ contact, onDeleteContact }) => {
   return (
     <ListItem>
       <ContactName>{contact.name}</ContactName>
-      <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+      <DeleteButton onClick={() => onDeleteContact(contact.id)}>Delete</DeleteButton>
     </ListItem>
   );
 };
