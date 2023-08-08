@@ -1,37 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { StyledContactForm } from './AddContactForm.styled';
 
-class ContactFormStep2 extends Component {
+class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const { name, number } = this.state;
+    this.props.onAddContact(name, number);
+    this.setState({ name: '', number: '' });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleNameChange = (e) => {
+    this.setState({ name: e.target.value });
+  };
 
-    const { name, number } = this.state;
-
-    if (name.trim() === '' || number.trim() === '') {
-      alert('Please enter both name and phone number');
-      return;
-    }
-
-    this.props.onAddContact(name, number);
-
-    this.setState({ name: '', number: '' });
+  handleNumberChange = (e) => {
+    this.setState({ number: e.target.value });
   };
 
   render() {
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <StyledContactForm onSubmit={this.onSubmit}>
         <label>
           Name:
           <input
@@ -41,7 +38,7 @@ class ContactFormStep2 extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             value={name}
-            onChange={this.handleChange}
+            onChange={this.handleNameChange}
           />
         </label>
         <label>
@@ -53,17 +50,17 @@ class ContactFormStep2 extends Component {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             value={number}
-            onChange={this.handleChange}
+            onChange={this.handleNumberChange}
           />
         </label>
         <button type="submit">Add Contact</button>
-      </form>
+      </StyledContactForm>
     );
   }
 }
 
-export default ContactFormStep2;
-
-ContactFormStep2.propTypes = {
+ContactForm.propTypes = {
   onAddContact: PropTypes.func.isRequired,
 };
+
+export default ContactForm;
